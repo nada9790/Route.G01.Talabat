@@ -28,9 +28,9 @@ namespace Route.Talabat.APIs.Controllers
         // Get product by Id
         [HttpGet("{id}")]
         public async Task<ActionResult>GetProduct(int id) 
-        { 
-
-              var Product = await _productRepo.GetByIdAsync(id);
+        {
+              var Spec = new ProductWithBrandAndTypeSpecification(id);
+              var Product = await _productRepo.GetByIdWithSpecAsync(Spec);
             return Ok(Product);
          }
      }
