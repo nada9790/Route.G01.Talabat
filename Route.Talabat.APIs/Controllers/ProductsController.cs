@@ -20,7 +20,7 @@ namespace Route.Talabat.APIs.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            var Spec = new BaseSpecifications<Product>();
+            var Spec = new ProductWithBrandAndTypeSpecification();
             var Products = await _productRepo.GetAllWithSpecAsync(Spec);
             return Ok(Products);
         }
