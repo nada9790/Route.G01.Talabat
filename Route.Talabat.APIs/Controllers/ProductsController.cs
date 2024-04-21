@@ -26,8 +26,8 @@ namespace Route.Talabat.APIs.Controllers
         {
             var Spec = new ProductWithBrandAndTypeSpecification();
             var Products = await _productRepo.GetAllWithSpecAsync(Spec);
-            var MappedProduct=_mapper.Map< IEnumerable<Product>, IEnumerable<ProductToReturnDto>>(Products);
-            return Ok(Products);
+            var MappedProducts=_mapper.Map< IEnumerable<Product>, IEnumerable<ProductToReturnDto>>(Products);
+            return Ok(MappedProducts);
         }
 
         // Get product by Id
@@ -36,7 +36,8 @@ namespace Route.Talabat.APIs.Controllers
         {
               var Spec = new ProductWithBrandAndTypeSpecification(id);
               var Product = await _productRepo.GetByIdWithSpecAsync(Spec);
-            return Ok(Product);
+              var MappedProduct =_mapper.Map<Product, ProductToReturnDto>(Product);
+            return Ok(MappedProduct);
          }
      }
 }
