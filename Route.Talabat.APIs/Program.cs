@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using Microsoft.Extensions.Options;
+using Route.Talabat.APIs.Controllers.Helpers;
 using Talabat.core.Repositories;
 using Talabat.Repository;
 using Talabat.Repository.Data;
@@ -10,7 +11,7 @@ namespace Route.Talabat.APIs
 {
     public class Program
     {
-        public static  async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ namespace Route.Talabat.APIs
             builder.Services.AddDbContext<StoreContext>(Options =>
               Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            //builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
+            builder.Services.AddAutoMapper(typeof(MappingProfiles));
              
             #endregion
             var app = builder.Build();
@@ -56,7 +59,7 @@ namespace Route.Talabat.APIs
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
