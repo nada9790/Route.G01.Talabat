@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Talabat.core.Entities;
+using Talabat.core.Entities.Order_Aggregate;
 
 namespace Talabat.Repository.Data
 {
@@ -55,6 +57,20 @@ namespace Talabat.Repository.Data
                     await _dbContext.SaveChangesAsync();
                 }
             }
+            //if (!_dbContext.DeliveryMethods.Any())
+            //{
+            //    var DeliveryMethodsData = File.ReadAllText("../Talabat.Repository/Data/DataSeed/delivery.json");
+            //    var DeliveryMethods = JsonSerializer.Deserialize<List<Product>>(DeliveryMethod);
+
+            //    if (DeliveryMethod?.Count > 0)
+            //    {
+            //        foreach (var DeliveryMethod in DeliveryMethods)
+            //        {
+            //            object value = await _dbContext.Set<DeliveryMethod>().AllAsync(DeliveryMethod);
+            //        }
+            //        await _dbContext.SaveChangesAsync();
+            //    }
+            //}
         }
 
     }
